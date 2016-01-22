@@ -1,0 +1,112 @@
+// Place all the styles related to the Posts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+#posts {
+  background: white;
+  padding: 2em 5%;
+  border-radius: .5em;
+  .post{
+    margin: 1em 0;
+    padding: 1em 0;
+    border-bottom: 1px solid #D1D1D1;
+    .title{
+      margin: 0;
+      a{
+        color: #397CAC;
+        font-weight: 100;
+        font-size: 1.25rem;
+      }
+    }
+    .date{
+      margin-top: .25rem;
+      font-size: 0.9rem;
+      color: #B2BAC2;
+    }
+  }
+}
+.button {
+  background: #9001b0;
+  color: white;
+  border: 1px solid #397CAC;
+  padding: .3em 1em;
+  border-radius: 0.1em;
+  margin-right: 1%;
+
+}
+#post_content{
+  background: white;
+  padding: 2em 5%;
+  border-radius: .5em;
+  h1{
+    font-weight: 100;
+    font-size: 2em;
+    color: #397CAC;
+    margin-top: 0;
+  }
+  p{
+    color: #B2BAC2;
+    font-size: 0.9rem;
+    font-weight: 100;
+    line-height: 1.5;
+
+  }
+  #comments {
+    .comment {
+      border-bottom: 1px solid #D1D1D1;
+      padding-bottom: 1em;
+      //margin-top: 1em;
+      margin-bottom: 1em;
+      border-radius: .4em;
+
+
+      .content {
+        width: 80%;
+        float: left;
+        //margin-top: 0em;
+
+      }
+      .buttons {
+        width: 20%;
+        float: left;
+        margin-top: 2em;
+        font-size: .8em;
+        text_align: right;
+        a {
+          background: #9001b0;
+          color: white;
+          border: 1px solid #397CAC;
+          padding: .5em 1em;
+          border-radius: 0.2em;
+          margin-right: 2%;
+
+        }
+
+      }
+      .comment_content {
+        margin: 0;
+        padding: 0;
+      }
+      .comment_author {
+        color: #397CAC;
+        margin-top: .5rem;
+        font-size: 0.6em;
+        font-weight: 700;
+      }
+    }
+    textarea {
+      width: 100%;
+      min-height: 100px;
+      border: 1px solid #D1D1D1;
+      border_radius: .2em;
+      margin: 1em 0;
+    }
+    input[type="submit"] {
+      background: #397CAC;
+      border: none;
+      coler : white;
+      font-weight:100;
+      padding: .5em 1em;
+      border_radius: .2em;
+    }
+  }
+}

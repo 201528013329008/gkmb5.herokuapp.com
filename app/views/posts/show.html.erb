@@ -1,0 +1,48 @@
+<div class="post_content">
+<div class="panel-heading">   
+  <a href="<%= url_for(user_path(@post.user)) %>"><img class="img-circle" border-radius:500px, height="40px", width="40px" <%= image_tag(@post.user.image.url(:medium))%>
+    </a>  <br>
+  <%= link_to @post.user.display_name, @post.user %> 
+  <small>发布在<%= time_ago_in_words @post.created_at %>前</small> 
+</div>
+
+  <h1>  <%= @post.biaoti %> </h1>
+<% if @post.image.size!=nil %>
+
+  <div class="col text-center" style="align: center">
+    <div class="col-xs-6">
+      <div class="thumbnail">
+
+
+        <%= image_tag(@post.image.url(:original)) %>
+
+      </div>
+    </div>
+  </div>
+    <br>
+    <br><br><br><br><br><br>
+    <br><br><br><br><br><br>
+    <br><br><br><br><br><br>
+    <br><br><br><br><br><br>
+      <br><br><br><br><br><br>
+      <br><br><br>
+    <% end%>
+
+
+
+
+ <%= sanitize(@post.body) %> 
+
+
+
+ <%=@post.fujianname %>
+<% if @post.attachment.url!=nil%>
+
+ <%= link_to "附件下载", @post.attachment_url %>
+    <% end%>
+<p> <%= @post.comments.count %>条回复</p>
+<%=render partial: 'the_comments/tree', locals: { commentable: @post, comments_tree: @comments }%>
+<br><br><br><br><br>
+<br>
+
+</div>

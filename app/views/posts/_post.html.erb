@@ -1,0 +1,57 @@
+<%
+    # Required parameters
+    # :post => a_post_record
+    #
+
+    user = post.user
+
+%>
+<div class="panel panel-default post-block">
+    <div class="panel-heading">
+
+
+      <a href="<%= url_for(user_path(user)) %>"><img class="img-circle" border-radius:500px, height="40px", width="40px" <%= image_tag(user.image.url(:medium))%>
+</a>
+
+      <br>
+
+      <%= link_to user.display_name, user %>
+      <small>发布在<%=time_ago_in_words post.created_at %> 前</small>
+    </div>
+
+  <div class="panel-body">
+    &nbsp;&nbsp;
+        <%= link_to post.biaoti, category_topic_post_path(@cat,@topic,post) %>
+
+      <br>
+
+    <% if post.image.size!=nil %>
+        <div class="col text-center" style="align: center">
+          <div class="col-sm-2">
+            <div class="thumbnail">
+              <a href="<%= url_for(category_topic_post_path(@cat,@topic,post)) %>"> <%= image_tag(post.image.url(:medium)) %></a>
+            </div>
+          </div>
+        </div>
+
+        <br>
+        <% end%>
+    <br>
+    <br>
+
+
+
+    <div class="post" >
+      <%= sanitize(post.body) %> 
+    </div>
+
+  </div>
+  <div class="panel-heading">
+
+    <p> <%= post.comments.count %>条<%= link_to "回复", category_topic_post_path(@cat,@topic,post) %></p> <% if post.created_at != post.updated_at %>
+
+        <strong>最新回复在 <%= time_ago_in_words post.updated_at %> 前</strong>
+    <% end %>
+    </div>
+
+</div>

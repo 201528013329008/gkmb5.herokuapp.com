@@ -1,0 +1,128 @@
+
+
+<br>
+<%= render 'partials/alerts' %>
+
+<br>
+<ol class="breadcrumb">
+  <li class="active">话题
+</ol>
+
+<% if @is_admin %>
+    <%= link_to "New Category", new_category_path, :class => 'btn btn-default', :style => 'margin-bottom: 20px' %>
+<% end %>
+
+
+
+<% @cats.each do |cat| %>
+    <div class="col text-center" style="align: center">
+      <div class="col-sm-2">
+        <div class="thumbnail">
+          <a href="<%= url_for(category_path(cat)) %>"> <%= image_tag(cat.image.url(:medium)) %></a>
+
+           <%= cat.description%>
+          <br>
+          <%= link_to cat.title, category_path(cat) , class: "btn btn-success"%>
+        </div>
+      </div>
+    </div>
+<% end %>
+<br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">-->
+  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+  <!--<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
+
+<style>
+      .carousel-inner > .item > img,
+      .carousel-inner > .item > a > img {
+          width: 100%;
+          margin:0em;
+
+      }
+  </style>
+
+
+<div class="container">
+  <br>
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+        <img src="b5.jpg" alt="a" width="260" height="60">
+      </div>
+
+      <div class="item">
+        <img src="b6.jpg" alt="b" width="260" height="60">
+      </div>
+
+      <div class="item">
+        <img src="b9.jpg" alt="c" width="260" height="60">
+      </div>
+
+      <div class="item">
+        <img src="b7.jpg" alt="d" width="260" height=60">
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
+  <br>
+  <br>  <br>
+  <br>
+  <br>
+
+
+
+
+
+
+
+
+<table class="hidden">
+  <tr>
+    <th></th>
+    <th>话题</th>
+    <th>描述</th>
+    <th>子话题</th>
+    <th>最近活跃</th>
+  </tr>
+  <% @cats.each_with_index do |cat, x| %>
+      <tr>
+        <td><%= x + 1 %></td>
+        <td><%= link_to cat.title, category_path(cat) %></td>
+        <td><%= cat.description %></td>
+        <td><%= cat.topics.count %></td>
+        <td>
+          <%= time_ago_in_words cat.last_activity_at %>
+          <% if cat.last_activity_user_id
+               user = User.find(cat.last_activity_user_id) %> ago
+              by <%= link_to user.display_name, user_path(user) %>
+          <% end %>
+        </td>
+      </tr>
+  <% end %>
+</table>

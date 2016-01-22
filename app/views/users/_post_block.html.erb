@@ -1,0 +1,32 @@
+<%
+    # Required parameters
+    # :post => a_post_record
+    #
+
+    user = post.user
+    topic = post.topic
+%>
+<div class="panel panel-default user-post-block">
+    <div class="panel-heading">
+
+
+
+        <img class="img-circle" border-radius:500px, height="40px", width="40px" <%= image_tag(user.image.url(:medium))%>
+
+        <br>
+
+        <%= link_to user.display_name, user %>
+      发布在
+
+        <%= link_to topic.title, [post.topic.category, topic] %>
+         <small><%= time_ago_in_words post.created_at %> ago</small>
+        <span class="subtle-text pull-right">帖</span>
+    </div>
+    <div class="panel-body">
+        <%= link_to post.biaoti,category_topic_post_path(topic.category_id,post.topic_id,post)%>
+        <% if post.created_at != post.updated_at %>
+            <br />
+            <strong>Edited <%= time_ago_in_words post.updated_at %> ago</strong>
+        <% end %>
+    </div>
+</div>

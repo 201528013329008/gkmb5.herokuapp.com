@@ -1,0 +1,27 @@
+<%= render 'partials/alerts' %>
+
+<ol class="breadcrumb">
+    <li><%= link_to "板块", categories_path %>
+    <li><%= link_to @cat.title, @cat %>
+  （话题）
+    <li class="active"><%= @topic.title %>
+  （子话题）
+</ol>
+<br>
+
+<div class="page-header">
+    <h2><%= @topic.title %>(子话题)</h2>
+
+</div>
+
+<%#= render 'actions_block' %>
+
+<%= render 'topics/body', :topic => @topic %>
+<%= render 'actions_block' %>
+
+<% @posts.each do |post| %>
+
+    <%= render 'posts/post', :post => post %>
+<% end %>
+
+<%= render 'actions_block' %>

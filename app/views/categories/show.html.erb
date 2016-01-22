@@ -1,0 +1,72 @@
+
+<br>
+<%= render 'partials/alerts' %>
+
+<ol class="breadcrumb">
+    <li><%= link_to "目录", categories_path %>
+    <li class="active"><%= @cat.title %>
+</ol>
+<div style="margin-bottom: 20px;">
+    <% if @is_admin %>
+    <% end %>
+</div>
+
+<% @topics.each do |topic| %>
+    <div class="col text-center" style="align: center">
+
+
+      <div class="col-sm-2">
+        <div class="thumbnail">
+
+          <a href="<%= url_for(category_topic_path(@cat,topic)) %>"> <%= image_tag(topic.image.url(:medium)) %></a>
+
+           <%= topic.body%>
+          <br>
+
+          <%= link_to topic.title, [@cat, topic] , class: "btn btn-success"%>
+
+        </div>
+      </div>
+
+
+    </div>
+<% end %>
+<table class="table">
+
+    <tr>
+         <th></th>
+        <th>子话题</th>
+        <th>帖子</th>
+        <th>话题发起者</th>
+        <th>创建</th>
+        <th>最近活跃</th>
+    </tr>
+
+
+    <% @topics.each_with_index do |topic, x| %>
+        <tr>
+
+            <%
+                user = User.find(topic.user_id)
+                is_owner = user_signed_in? && current_user.id == user.id
+            %>
+            <td><%= x + 1 %></td>
+            <td><%= link_to topic.title, [@cat, topic] %></td>
+            <td><%= topic.posts.length %></td>
+            <td><%= link_to user.display_name, user_path(user) %></td>
+            <td><%= time_ago_in_words topic.created_at %> ago</td>
+            <td>
+                <%= time_ago_in_words topic.last_activity_at %> ago
+                <% if topic.last_activity_user_id 
+                    user = User.find(topic.last_activity_user_id) %>
+                    by <%= link_to user.display_name, user_path(user) %>
+                <% end %>
+            </td>
+
+        </tr>
+    <% end %>
+
+</table>
+<%= render 'show_actions_block' %>
+
+

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<html>
+    <head>
+        <title>果壳漫步</title>
+        <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+        <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+        <%= csrf_meta_tags %>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <style>
+        a:link{ text-decoration:none}
+
+      </style>
+
+
+    </head>
+    <body>
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <div class="navbar-header pull-left">
+                    <a class="navbar-brand" href="/" ><h2><font color="#ff4500">果</font><font color="#8a2be2">壳</font><font color="#ff4500">漫</font><font color="#8a2be2">步</font></h2> <% if @is_admin_path %>/ Admin<% end %></a>
+                    <img height="80px", width="420px" src="/2.png">
+                </div>
+                <% if user_signed_in? %>
+
+                    <div class="btn-group navbar-btn pull-right">
+
+
+                        <%= link_to current_user.display_name, user_path(current_user), class: "btn btn-success" %>
+
+
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <span class="caret"></span>
+                        </button>
+
+
+                        <ul class="dropdown-menu" role="menu">
+                            <% if @is_admin %>
+                                <li><%= link_to "Admin Users", admin_users_path %>
+                            <% end %>
+                            <li><%= link_to "mystyle", edit_user_registration_path %>
+                            <li><%= link_to "先走一步", destroy_user_session_path, :method => :delete %>
+                        </ul>
+
+
+                    </div>
+                  <wbr>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                  <% if current_user.image.size!=nil%>
+
+                      <a href="<%= url_for(user_path(current_user)) %>"> <img class="img-circle" border-radius:500px, height="60px", width="60px"<%= image_tag(current_user.image.url(:medium)) %>
+                  </a><%end%>
+                      </div>
+                  <!--<img class="img-circle" border-radius:500px, height="60px", width="60px", src="/1.png" style="position:absolute; left:1100px;top: 1px; ">-->
+
+                <% else %>
+                    <div class="btn-group pull-right navbar-btn">
+                        <%= link_to "登录", new_user_session_path, class: "btn btn-default" %>
+                        <%= link_to "注册", new_user_registration_path, class: "btn btn-default" %>
+                    </div>
+                <% end %>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row">
+                <div class="col-12"><%= yield %></div>
+            </div>
+        </div>
+    </body>
+</html>

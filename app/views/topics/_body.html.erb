@@ -1,0 +1,21 @@
+<%
+    # Required parameters
+    # :topic => a_topic_record
+    #
+
+    user = topic.user
+%>
+<div class="panel panel-default topic-block">
+    <div class="panel-heading">
+        <%= link_to user.display_name, user %>
+      (子话题发起者)
+        <span class="subtle-text pull-right">子话题</span>
+    </div>
+    <div class="panel-body">
+        <%= topic.body %>
+        <% if topic.created_at != topic.updated_at %>
+            <br />
+            <strong>帖子活跃在 <%= time_ago_in_words topic.updated_at %> 前</strong>
+        <% end %>
+    </div>
+</div>
