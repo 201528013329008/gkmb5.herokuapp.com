@@ -2,14 +2,20 @@
 - 国壳漫步是基于ruby on rails 一款社区应用
 基于
 > Ruby: 2.2.3
+
 >Rails: 4.2.5
+
 >OS: Mac OSX 10.10.5
+
 >后台服务器基于heroku
+
 >静态资源在AWS S3
 
 gem包
 Devise (User management)
+
 Bootstrap 3.0
+
 Kaminari (Pagination)
 
 
