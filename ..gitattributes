@@ -1,0 +1,3 @@
+*.js linguist-language=ruby
+*.css linguist-language=ruby
+*.erb linguist-language=ruby
