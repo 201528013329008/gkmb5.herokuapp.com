@@ -86,15 +86,15 @@ require 'active_support/core_ext/object/try' require 'action_controller/vendor
 就可以完美过滤掉标签啦 
 
 
-heroku默认不保存静态文件的解决方案
+## heroku默认不保存静态文件的解决方案
 - 如果你用paperclip上传文件的话会默认存到public里面的system
 - 如果你用carrierwave上传文件的话会默认存到public里面的uploader
 - heroku会默认存两个小时，文件地址就会失效
                                 
 
-解决方案（paperclip）：
-- 静态文件存储（亚马逊  s3）aws_sdk(gem小版本就okay)
-- 信用卡注册
-- 建bucket 
-- 写bucket policy
-- 配置生产环境 id +密钥
+	#### 解决方案（paperclip）：
+	- 静态文件存储（亚马逊  s3）aws_sdk(gem小版本就okay)
+	- 信用卡注册
+	- 建bucket 
+	- 写bucket policy
+	- 配置生产环境 id +密钥
