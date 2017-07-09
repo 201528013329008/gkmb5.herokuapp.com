@@ -74,8 +74,9 @@ var editor = new Simditor({
 ```
 
 
-上面的semditor是rubychina社区里的  但是你发布的帖子浏览器不能解析html标签，解决方案是
-在lib里创建文件夹action_view文件夹里面创建helpers文件夹中创建sanitize_help.rb文件 
+ ####上面的semditor是rubychina社区里的  但是你发布的帖子浏览器不能解析html标签，
+ 解决方案是
+- 在lib里创建文件夹action_view文件夹里面创建helpers文件夹中创建sanitize_help.rb文件 
 ```objc
 
 require 'active_support/core_ext/object/try' require 'action_controller/vendor/html-scanner' require 'action_view/helpers/tag_helper' module ActionView   # = Action View Sanitize Helpers   module Helpers #:nodoc:      module SanitizeHelper       extend ActiveSupport::Concern                  def sanitize(html, options = {})         self.class.white_list_sanitizer.sanitize(html, options).try(:html_safe)       end       # Sanitizes a block of CSS code. Used by +sanitize+ when it comes across a style attribute.       def sanitize_css(style)         self.class.white_list_sanitizer.sanitize_css(style)       end             def strip_tags(html)         self.class.full_sanitizer.sanitize(html).try(:html_safe)       end        def strip_links(html)         self.class.link_sanitizer.sanitize(html)       end       module ClassMethods #:nodoc:         attr_writer :full_sanitizer, :link_sanitizer, :white_list_sanitizer         def sanitized_protocol_separator           white_list_sanitizer.protocol_separator         end         def sanitized_uri_attributes           white_list_sanitizer.uri_attributes         end         def sanitized_bad_tags           white_list_sanitizer.bad_tags         end         def sanitized_allowed_tags           white_list_sanitizer.allowed_tags         end         def sanitized_allowed_attributes           white_list_sanitizer.allowed_attributes         end         def sanitized_allowed_css_properties           white_list_sanitizer.allowed_css_properties         end         def sanitized_allowed_css_keywords           white_list_sanitizer.allowed_css_keywords         end         def sanitized_shorthand_css_properties           white_list_sanitizer.shorthand_css_properties         end         def sanitized_allowed_protocols           white_list_sanitizer.allowed_protocols         end         def sanitized_protocol_separator=(value)           white_list_sanitizer.protocol_separator = value         end               def full_sanitizer           @full_sanitizer ||= HTML::FullSanitizer.new         end              def link_sanitizer           @link_sanitizer ||= HTML::LinkSanitizer.new         end                def white_list_sanitizer           @white_list_sanitizer ||= HTML::WhiteListSanitizer.new         end              def sanitized_uri_attributes=(attributes)           HTML::WhiteListSanitizer.uri_attributes.merge(attributes)         end              def sanitized_bad_tags=(attributes)           HTML::WhiteListSanitizer.bad_tags.merge(attributes)         end                def sanitized_allowed_tags=(attributes)           HTML::WhiteListSanitizer.allowed_tags.merge(attributes)         end                 def sanitized_allowed_attributes=(attributes)           HTML::WhiteListSanitizer.allowed_attributes.merge(attributes)         end               def sanitized_allowed_css_properties=(attributes)           HTML::WhiteListSanitizer.allowed_css_properties.merge(attributes)         end               def sanitized_allowed_css_keywords=(attributes)           HTML::WhiteListSanitizer.allowed_css_keywords.merge(attributes)         end                 def sanitized_shorthand_css_properties=(attributes)           HTML::WhiteListSanitizer.shorthand_css_properties.merge(attributes)         end                def sanitized_allowed_protocols=(attributes)           HTML::WhiteListSanitizer.allowed_protocols.merge(attributes)         end       end     end   end end
@@ -86,13 +87,14 @@ require 'active_support/core_ext/object/try' require 'action_controller/vendor
 
 
 heroku默认不保存静态文件的解决方案
-如果你用paperclip上传文件的话会默认存到public里面的system
-如果你用carrierwave上传文件的话会默认存到public里面的uploader
-heroku会默认存两个小时，文件地址就会失效
+- 如果你用paperclip上传文件的话会默认存到public里面的system
+- 如果你用carrierwave上传文件的话会默认存到public里面的uploader
+- heroku会默认存两个小时，文件地址就会失效
                                 
 
-解决方案（paperclip）：静态文件存储（亚马逊  s3）aws_sdk(gem小版本就okay)
-信用卡注册
-建bucket 
-写bucket policy
-配置生产环境 id +密钥
+解决方案（paperclip）：
+- 静态文件存储（亚马逊  s3）aws_sdk(gem小版本就okay)
+- 信用卡注册
+- 建bucket 
+- 写bucket policy
+- 配置生产环境 id +密钥
