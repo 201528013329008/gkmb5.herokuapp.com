@@ -74,8 +74,8 @@ var editor = new Simditor({
 ```
 
 
- ####上面的semditor是rubychina社区里的  但是你发布的帖子浏览器不能解析html标签，
- 解决方案是
+ #### 上面的semditor是rubychina社区里的  但是你发布的帖子浏览器不能解析html标签，解决方案
+ 
 - 在lib里创建文件夹action_view文件夹里面创建helpers文件夹中创建sanitize_help.rb文件 
 ```objc
 
